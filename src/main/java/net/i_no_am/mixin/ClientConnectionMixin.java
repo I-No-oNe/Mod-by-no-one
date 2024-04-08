@@ -1,6 +1,6 @@
 package net.i_no_am.mixin;
 
-import net.i_no_am.modules.ToggledHack;
+import net.i_no_am.modules.ToggledModule;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.network.PacketCallbacks;
 import net.minecraft.network.listener.PacketListener;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static net.i_no_am.client.ClientEntrypoint.packetQueue;
-import static net.i_no_am.client.ClientEntrypoint.toggledHacks;
+import static net.i_no_am.client.ClientEntrypoint.TOGGLED_MODULES;
 
 @Mixin(ClientConnection.class)
 public class ClientConnectionMixin {
@@ -43,9 +43,9 @@ public class ClientConnectionMixin {
     @Inject(method = "disconnect", at = @At("HEAD"))
     void onDisconnect(Text reason, CallbackInfo ci) {
         packetQueue.clear();
-        for (ToggledHack hack : toggledHacks) {
-            if (hack.enabled != hack.defaultEnabled) {
-                hack.toggle();
+        for (ToggledModule modules : TOGGLED_MODULES) {
+            if (modules.enabled != modules.defaultEnabled) {
+                modules.toggle();
             }
         }
     }

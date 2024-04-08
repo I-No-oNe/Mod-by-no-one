@@ -2,16 +2,16 @@
 	"schemaVersion": 1,
 	"id": "no-one-mod",
 	"version": "${version}",
-	"name": "No-one mod",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "No-one's mod",
+	"description": "Mod that no one gonna use",
 	"authors": [
-		"Me!"
+		"i_no_am"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/no-one-mod/icon.png",
 	"environment": "*",
 	"entrypoints": {
@@ -32,6 +32,6 @@
 		"fabric-api": "*"
 	},
 	"suggests": {
-		"another-mod": "*"
+		"another-mod": "ClickCrystals"
 	}
 }

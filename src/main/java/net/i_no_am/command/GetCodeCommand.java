@@ -22,7 +22,7 @@ import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 public class GetCodeCommand {
-    private static final Dynamic2CommandExceptionType TOO_BIG_EXCEPTION = new Dynamic2CommandExceptionType((maxCount, count) -> Text.translatable("commands.fill.toobig", maxCount, count));
+    private static final Dynamic2CommandExceptionType TOO_BIG_EXCEPTION = new Dynamic2CommandExceptionType((maxCount, count) -> Text.stringifiedTranslatable("commands.fill.toobig", maxCount, count));
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         // Checks to see if bedrock is at a certain position (for tracing in debugger)

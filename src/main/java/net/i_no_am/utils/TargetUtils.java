@@ -55,7 +55,7 @@ public class TargetUtils {
             double x2 = pos.x + Math.cos(theta2) * radius;
             double y2 = pos.y + target.getHeight();
             double z2 = pos.z + Math.sin(theta2) * radius;
-            fillQuad(matrices, pos, new Vec3d(x1, y1, z1), new Vec3d(x2, y2, z2), 0xFF77D578, 0xFF77D578);
+            fillQuad(matrices, pos, new Vec3d(x1, y1, z1), new Vec3d(x2, y2, z2), 0xFF77D578, 0x0000FF00);
         }
     }
 

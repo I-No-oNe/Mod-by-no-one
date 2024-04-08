@@ -29,7 +29,8 @@ public class ClientEntrypoint implements ClientModInitializer {
 
     public static final AttackAssistance ATTACK_ASSISTANCE = new AttackAssistance();
 
-    public static final ToggledHack[] toggledHacks = new ToggledHack[] {
+
+    public static final ToggledModule[] TOGGLED_MODULES = new ToggledModule[] {
             SPECTATOR_SIGHT,
             NO_GUI_BACKGROUND,
             ATTACK_ASSISTANCE,
@@ -43,9 +44,9 @@ public class ClientEntrypoint implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         // Register functions for hacks
-        for (ToggledHack hack : toggledHacks) {
-            KeyBindingHelper.registerKeyBinding(hack.keybind);  // Keybinds
-            ClientTickEvents.END_CLIENT_TICK.register(hack::tick);  // Every tick
+        for (ToggledModule module : TOGGLED_MODULES) {
+            KeyBindingHelper.registerKeyBinding(module.keybind);  // Keybinds
+            ClientTickEvents.END_CLIENT_TICK.register(module::tick);  // Every tick
         }
 
         ClientTickEvents.END_CLIENT_TICK.register(ClientEntrypoint::tickEnd);  // End of every tick

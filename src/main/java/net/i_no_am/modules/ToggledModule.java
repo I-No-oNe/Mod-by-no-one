@@ -5,12 +5,11 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.text.Text;
 
 import static com.mojang.text2speech.Narrator.LOGGER;
-import static net.i_no_am.NoOneMod.PREFIX;
 import static net.i_no_am.client.ClientEntrypoint.client;
 import static net.i_no_am.client.ClientEntrypoint.networkHandler;
 
 
-public abstract class ToggledHack {
+public abstract class ToggledModule {
     public static final String I_NO_AM_CATEGORY = "category.i_no_am";
 
     public final KeyBinding keybind;
@@ -23,7 +22,7 @@ public abstract class ToggledHack {
      * @param name Display name of the hack
      * @param key The GLFW key code of the keybind
      */
-    ToggledHack(String name, int key) {
+    ToggledModule(String name, int key) {
         keybind = new KeyBinding("key.i_no_am." + this.getClass().getSimpleName().toLowerCase() + "_toggle",
                 key, I_NO_AM_CATEGORY);
         this.name = name;
@@ -94,7 +93,7 @@ public abstract class ToggledHack {
 
         message = "§7" + message.replace("§r", "§7");  // Make white text gray
 
-        client.player.sendMessage(Text.of(PREFIX + name + ": " + message), true);
+        client.player.sendMessage(Text.of(  name + ": " + message), true);
     }
 
     public boolean isEnabled() {
