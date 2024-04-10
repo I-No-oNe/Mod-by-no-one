@@ -1,10 +1,10 @@
 package net.i_no_am.modules;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.i_no_am.utils.InteractionUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.item.Items;
-import net.minecraft.util.Hand;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import org.lwjgl.glfw.GLFW;
@@ -13,7 +13,6 @@ import java.util.Objects;
 import java.util.Random;
 
 import static net.i_no_am.client.ClientEntrypoint.AUTO_ATTACK;
-import static net.i_no_am.utils.InteractionUtils.doAttack;
 
 public class AutoAttack extends ToggledModule {
 
@@ -53,7 +52,7 @@ public class AutoAttack extends ToggledModule {
 
         // Attacking the targeted entity after a random delay
         int minDelayTicks = 3; // 1 second in ticks
-        int maxDelayTicks = 15; // 2 seconds in ticks
+        int maxDelayTicks = 10; // 2 seconds in ticks
         int randomDelayTicks = random.nextInt(maxDelayTicks - minDelayTicks + 1) + minDelayTicks;
 
         // Check if enough ticks have passed since the last attack
@@ -63,7 +62,7 @@ public class AutoAttack extends ToggledModule {
         if (Objects.requireNonNull(client.world).getTime() % randomDelayTicks != 0) return;
 
         // Perform the attack
-        doAttack(client);
-        player.swingHand(Hand.MAIN_HAND);
+        InteractionUtils.inputAttack();
+
     }
 }

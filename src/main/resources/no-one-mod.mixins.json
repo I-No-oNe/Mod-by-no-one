@@ -20,6 +20,7 @@
     "MixinGameRenderer",
     "MixinInGameHud",
     "MixinLightmapTextureManager",
+    "MixinMinecraftClient",
     "MixinScreen",
     "MixinSession"
   ]
