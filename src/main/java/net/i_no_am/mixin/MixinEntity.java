@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import static net.i_no_am.client.ClientEntrypoint.SPECTATOR_SIGHT;
 
 @Mixin(Entity.class)
-public abstract class EntityMixin {
+public abstract class MixinEntity {
 
     @Inject(method = "isInvisibleTo", at = @At("HEAD"), cancellable = true)
     private void overrideIsInvisibleToPlayer(PlayerEntity player, CallbackInfoReturnable<Boolean> cir) {

@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import static net.i_no_am.client.ClientEntrypoint.client;
 
 @Mixin(InGameHud.class)
-public class InGameHudMixin {
+public class MixinInGameHud {
 
     // Don't overwrite the overlay message if it contains "LiveOverflow"
     @Inject(method = "setOverlayMessage", at = @At("HEAD"), cancellable = true)

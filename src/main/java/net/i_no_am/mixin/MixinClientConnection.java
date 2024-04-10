@@ -15,7 +15,7 @@ import static net.i_no_am.client.ClientEntrypoint.packetQueue;
 import static net.i_no_am.client.ClientEntrypoint.TOGGLED_MODULES;
 
 @Mixin(ClientConnection.class)
-public class ClientConnectionMixin {
+public class MixinClientConnection {
     // Log outgoing packets (for debugging)
     @SuppressWarnings({"EmptyMethod", "CommentedOutCode"})
     @Inject(method = "sendImmediately", at = @At("HEAD"))

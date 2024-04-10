@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import static net.i_no_am.client.ClientEntrypoint.ATTACK_ASSISTANCE;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin {
+public abstract class MixinPlayerEntity {
 
     @Inject(method = "attack", at = @At("HEAD"))
     public void attack(Entity target, CallbackInfo ci) {

@@ -4,19 +4,23 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "ClientConnectionInvoker",
-    "ClientConnectionMixin",
-    "EntityMixin",
-    "PlayerEntityMixin"
+    "MixinClientConnection",
+    "MixinEntity",
+    "MixinItemStack",
+    "MixinLivingEntity",
+    "MixinPlayerEntity"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "client": [
-    "ArmorFeatureRendererMixin",
     "InGameHudAccessor",
-    "InGameHudMixin",
     "LivingEntityRendererMixin",
-    "ScreenMixin",
-    "SessionMixin"
+    "MixinArmorFeatureRenderer",
+    "MixinGameRenderer",
+    "MixinInGameHud",
+    "MixinLightmapTextureManager",
+    "MixinScreen",
+    "MixinSession"
   ]
 }

@@ -31,7 +31,7 @@ public abstract class ToggledModule {
     /**
      * Called every tick
      */
-    public void tick(MinecraftClient client) {  // Called every tick
+    public void tick(MinecraftClient ignoredClient) {  // Called every tick
         if (keybind.wasPressed()) {
             toggle();
         }

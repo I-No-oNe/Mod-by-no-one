@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 
 public class NoOneMod implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("No one's mod");
-    public static final String PREFIX = "§8[§l§aI-No-oNe§r§8] §r";
+    public static final String PREFIX = " §8[§l§aNo-one's mod:§r§8]§r ";
 
     @Override
     public void onInitialize() {

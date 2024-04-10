@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import static net.i_no_am.client.ClientEntrypoint.*;
 
 @Mixin(ArmorFeatureRenderer.class)
-public class ArmorFeatureRendererMixin<T extends LivingEntity, A extends BipedEntityModel<T>> {
+public class MixinArmorFeatureRenderer<T extends LivingEntity, A extends BipedEntityModel<T>> {
     @Inject(method = "renderArmor", at = @At("HEAD"), cancellable = true)
     private void onRenderArmor(MatrixStack matrices, VertexConsumerProvider vertexConsumers, T livingEntity, EquipmentSlot slot, int i, A bipedEntityModel, CallbackInfo ci) {
         if (NO_ARMOR_RENDER.enabled) {

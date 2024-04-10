@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 
 @Mixin(Session.class)
-public class SessionMixin {
+public class MixinSession {
     @Unique
     private final HashMap<String, HashSet<String>> names = new HashMap<>() {{
         put("Hackende", new HashSet<>(List.of("Hackende", "HACKENDE", "hackende", "HACKende", "hackENDe", "HaCkEnDe", "hAcKeNdE", "HackendE", "HackEnde")));

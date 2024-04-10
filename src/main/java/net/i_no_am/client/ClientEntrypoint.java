@@ -23,7 +23,10 @@ import java.util.LinkedList;
 public class ClientEntrypoint implements ClientModInitializer {
     public static final NoArmorRender NO_ARMOR_RENDER = new NoArmorRender();
 
-    public static final NoGuiBackground NO_GUI_BACKGROUND = new NoGuiBackground();
+    public static final AutoAttack AUTO_ATTACK = new AutoAttack();
+
+    public static final RenderTweaks RENDER_TWEAKS = new RenderTweaks();
+
 
     public static final SpectatorSight SPECTATOR_SIGHT = new SpectatorSight();
 
@@ -32,8 +35,9 @@ public class ClientEntrypoint implements ClientModInitializer {
 
     public static final ToggledModule[] TOGGLED_MODULES = new ToggledModule[] {
             SPECTATOR_SIGHT,
-            NO_GUI_BACKGROUND,
             ATTACK_ASSISTANCE,
+            RENDER_TWEAKS,
+            AUTO_ATTACK,
             NO_ARMOR_RENDER
     };
     public static final MinecraftClient client = MinecraftClient.getInstance();

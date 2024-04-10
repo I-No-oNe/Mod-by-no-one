@@ -23,7 +23,7 @@ public class Gui {
         // Show player name as title
         String playerName = getPlayerName(client.player);
         if (playerName != null) {
-            renderTextShadow(context, "§8[§l§6" + playerName + "§r§8]", TOGGLED_MODULES.length);
+            renderTextShadow(context, "§l§b" + playerName + " modules:" + "§r", TOGGLED_MODULES.length);
         }
     }
 
