@@ -25,7 +25,6 @@ public class AutoAttack extends ToggledModule {
 
     @Override
     public void onEnable() {
-        // Registering a client tick event to constantly check for auto-attack
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (AUTO_ATTACK.enabled) {
                 autoAttack();
@@ -52,17 +51,16 @@ public class AutoAttack extends ToggledModule {
 
         // Attacking the targeted entity after a random delay
         int minDelayTicks = 3; // 1 second in ticks
-        int maxDelayTicks = 10; // 2 seconds in ticks
+        int maxDelayTicks = 15; // 2 seconds in ticks (increased for more randomness)
         int randomDelayTicks = random.nextInt(maxDelayTicks - minDelayTicks + 1) + minDelayTicks;
 
         // Check if enough ticks have passed since the last attack
-        if (client.player.getAttackCooldownProgress(1.0F) < 0.99) return;
+        if (player.getAttackCooldownProgress(0.0F) < 1.0) return; // Not ready to attack yet
 
         // Check if enough ticks have passed to trigger the attack
         if (Objects.requireNonNull(client.world).getTime() % randomDelayTicks != 0) return;
 
         // Perform the attack
         InteractionUtils.inputAttack();
-
     }
 }
