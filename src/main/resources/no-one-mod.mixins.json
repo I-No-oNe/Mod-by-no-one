@@ -17,11 +17,13 @@
     "InGameHudAccessor",
     "LivingEntityRendererMixin",
     "MixinArmorFeatureRenderer",
+    "MixinDeathScreen",
     "MixinGameRenderer",
     "MixinInGameHud",
     "MixinLightmapTextureManager",
     "MixinMinecraftClient",
     "MixinScreen",
-    "MixinSession"
+    "MixinSession",
+    "MixinSplashTextResourceSupplier"
   ]
 }
