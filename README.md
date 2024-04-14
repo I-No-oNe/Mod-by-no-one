@@ -1,12 +1,12 @@
-<div class="main-banner" style="border: 2px aqua solid; border-radius: 20px; border-style: outset; padding-left: 5px;">
-  <h1>
+<div class="main-banner" style="border: 2px aqua solid; border-radius: 20px; border-style: outset; padding-right: 5px; display: flex; justify-content: space-between; align-items: center;">
+  <h1 style="font-family: Arial, sans-serif;">
     <img src="https://github.com/I-No-oNe/I-No-One/assets/145749961/08131b4e-dcb9-4996-b9cd-351de13528c7"
-      style="width: 15%; transform: translateY(10px);"/>
-    <a>No one's mod</a>
+      style="width: 15%; transform: translateY(10px); float: right;"/>
   </h1>
 </div>
 
 ---------------------
+# *No one's mod*
 ### *A utility mod for minecraft made by I-No-oNe*
 ***Features:***
 - Attack Assistance
