@@ -81,9 +81,13 @@ public class ClientEntrypoint implements ClientModInitializer {
 
     public static void registerClientCommands(CommandDispatcher<FabricClientCommandSource> dispatcher) {
         ClipCommand.register(dispatcher);
+        DisablerGuiCommand.register(dispatcher);
     }
+
+
 
     public static void registerServerCommands(CommandDispatcher<ServerCommandSource> dispatcher) {
         GetCodeCommand.register(dispatcher);
     }
 }
+//TODO: Bow switch, Flight(without bypass but with no fall).

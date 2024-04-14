@@ -7,8 +7,8 @@
 </div>
 
 ---------------------
-### A utilty mod for minecraft made by I-No-oNe
-Features:
+### *A utility mod for minecraft made by I-No-oNe*
+***Features:***
 - Attack Assistance
 - Render Tweaks
 - Auto Attack
@@ -20,4 +20,7 @@ Features:
 ------------------------------
 ![image](https://github.com/I-No-oNe/No-one-s-mod/assets/145749961/8739e20e-10a9-404a-9796-1c3cc553229e)
 ----------------------------
-### This project purpse is to learn java, so don't accuse this mod/client to be "cheats".
+## This project is for educational purposes, so don't accuse this "mod" or "client" to be "cheats".
+
+----------------------------------------------------
+## Tysm for using this mod :pray:

@@ -1,15 +1,16 @@
 package net.i_no_am.client;
 
+import net.i_no_am.command.DisablerGuiCommand;
 import net.i_no_am.modules.ToggledModule;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.network.ClientPlayerEntity;
 
-import static net.i_no_am.client.ClientEntrypoint.client;
-import static net.i_no_am.client.ClientEntrypoint.TOGGLED_MODULES;
+import static net.i_no_am.client.ClientEntrypoint.*;
 
 public class Gui {
-
     public static void render(DrawContext context, float ignoredTickDelta) {
+        if (!DisablerGuiCommand.isGuiEnabled()) return; // Check if GUI rendering is enabled
+
         // Show all modules in the bottom right corner
         for (int i = 0; i < TOGGLED_MODULES.length; i++) {
             ToggledModule module = TOGGLED_MODULES[TOGGLED_MODULES.length - i - 1];

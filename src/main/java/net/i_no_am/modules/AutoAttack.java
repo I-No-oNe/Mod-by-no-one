@@ -50,9 +50,8 @@ public class AutoAttack extends ToggledModule {
 
         if (!entityHitResult.getType().equals(EntityHitResult.Type.ENTITY)) return;
 
-        // Check if the targeted entity is a villager with a profession other than LIBRARIAN
-        if (entityHitResult.getEntity() instanceof VillagerEntity villager && villager.getVillagerData().getProfession() == VillagerProfession.LIBRARIAN) {
-            return; // Don't attack librarians
+        if (entityHitResult.getEntity() instanceof VillagerEntity villager &&    villager.getVillagerData().getProfession() == VillagerProfession.NONE) {
+            return;
         }
 
         int minDelayTicks = 3;
