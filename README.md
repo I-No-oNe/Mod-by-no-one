@@ -18,7 +18,7 @@
 - coords death message
 - and much more!
 ------------------------------
-![image](https://github.com/I-No-oNe/No-one-s-mod/assets/145749961/8739e20e-10a9-404a-9796-1c3cc553229e)
+![Picture](https://github.com/I-No-oNe/No-one-s-mod/assets/145749961/c5940614-44bc-4099-b116-cf95597059d3)
 ----------------------------
 ## This project is for educational purposes, so don't accuse this "mod" or "client" to be "cheats".
 
