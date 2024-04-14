@@ -4,9 +4,11 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.i_no_am.utils.InteractionUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
+import net.minecraft.village.VillagerProfession;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.Objects;
@@ -43,24 +45,24 @@ public class AutoAttack extends ToggledModule {
                 !player.isHolding(Items.GOLDEN_AXE) && !player.isHolding(Items.DIAMOND_AXE) && !player.isHolding(Items.NETHERITE_AXE)) {
             return; // Player is not holding a weapon
         }
-        // Getting the targeted entity from the hit result
         HitResult hitResult = client.crosshairTarget;
         if (!(hitResult instanceof EntityHitResult entityHitResult)) return;
 
         if (!entityHitResult.getType().equals(EntityHitResult.Type.ENTITY)) return;
 
-        // Attacking the targeted entity after a random delay
-        int minDelayTicks = 3; // 1 second in ticks
-        int maxDelayTicks = 15; // 2 seconds in ticks (increased for more randomness)
+        // Check if the targeted entity is a villager with a profession other than LIBRARIAN
+        if (entityHitResult.getEntity() instanceof VillagerEntity villager && villager.getVillagerData().getProfession() == VillagerProfession.LIBRARIAN) {
+            return; // Don't attack librarians
+        }
+
+        int minDelayTicks = 3;
+        int maxDelayTicks = 17;
         int randomDelayTicks = random.nextInt((int) (maxDelayTicks - minDelayTicks -0.2)) + minDelayTicks;
 
-        // Check if enough ticks have passed since the last attack
-        if (player.getAttackCooldownProgress(0.0F) < 1.0) return; // Not ready to attack yet
+        if (player.getAttackCooldownProgress(0.0F) < 1.0) return;
 
-        // Check if enough ticks have passed to trigger the attack
         if (Objects.requireNonNull(client.world).getTime() % randomDelayTicks != 0) return;
 
-        // Perform the attack
         InteractionUtils.inputAttack();
     }
 }

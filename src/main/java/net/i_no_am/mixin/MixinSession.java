@@ -15,7 +15,7 @@ import java.util.List;
 public class MixinSession {
     @Unique
     private final HashMap<String, HashSet<String>> names = new HashMap<>() {{
-        put("Hackende", new HashSet<>(List.of("Hackende", "HACKENDE", "hackende", "HACKende", "hackENDe", "HaCkEnDe", "hAcKeNdE", "HackendE", "HackEnde")));
+        put("frfrf", new HashSet<>(List.of("Notch", "i_no_am", "Someone", "ImproperIssues", "github", "im tired", "Sleep", "sleeP", "What is it?")));
         // Put your own fun name in here :)
     }};
 

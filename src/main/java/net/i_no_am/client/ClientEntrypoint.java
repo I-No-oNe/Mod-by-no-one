@@ -32,12 +32,15 @@ public class ClientEntrypoint implements ClientModInitializer {
 
     public static final AttackAssistance ATTACK_ASSISTANCE = new AttackAssistance();
 
+    public static final ElytraSwitch ELYTRA_SWITCH = new ElytraSwitch();
+
 
     public static final ToggledModule[] TOGGLED_MODULES = new ToggledModule[] {
             SPECTATOR_SIGHT,
             ATTACK_ASSISTANCE,
             RENDER_TWEAKS,
             AUTO_ATTACK,
+            ELYTRA_SWITCH,
             NO_ARMOR_RENDER
     };
     public static final MinecraftClient client = MinecraftClient.getInstance();

@@ -4,6 +4,6 @@
   "key.i_no_am.noarmorrender_toggle": "Toggle No-armor render",
   "key.i_no_am.attackassistance_toggle": "Toggle Attack assistance",
   "key.i_no_am.rendertweaks_toggle": "Toggle Render tweaks",
-  "key.i_no_am.autoattack_toggle": "Toggle Auto Attack"
-
+  "key.i_no_am.autoattack_toggle": "Toggle Auto Attack",
+  "key.i_no_am.elytraswitch_toggle": "Toggle Elytra Switch"
 }
