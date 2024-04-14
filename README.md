@@ -2,7 +2,7 @@
   <h1>
     <img src="https://github.com/I-No-oNe/I-No-One/assets/145749961/08131b4e-dcb9-4996-b9cd-351de13528c7"
       style="width: 15%; transform: translateY(10px);"/>
-    <a><em>No one's mod</em></a>
+    <a>No one's mod</a>
   </h1>
 </div>
 
