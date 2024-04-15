@@ -9,14 +9,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static net.i_no_am.client.ClientEntrypoint.ATTACK_ASSISTANCE;
+import static net.i_no_am.client.ClientEntrypoint.AUTO_ATTACK;
 
 @Mixin(PlayerEntity.class)
 public abstract class MixinPlayerEntity {
 
     @Inject(method = "attack", at = @At("HEAD"))
     public void attack(Entity target, CallbackInfo ci) {
-        if (target instanceof LivingEntity living && ATTACK_ASSISTANCE.enabled) {
+        if (target instanceof LivingEntity living && AUTO_ATTACK.enabled) {
             TargetUtils.setTarget(living);
         }
     }

@@ -27,19 +27,19 @@ public class ClientEntrypoint implements ClientModInitializer {
 
     public static final RenderTweaks RENDER_TWEAKS = new RenderTweaks();
 
+    public static final FlyHack FLY_HACK = new FlyHack();
 
-    public static final SpectatorSight SPECTATOR_SIGHT = new SpectatorSight();
+    public static final BoatFly BOAT_FLY = new BoatFly();
 
-    public static final AttackAssistance ATTACK_ASSISTANCE = new AttackAssistance();
 
     public static final ElytraSwitch ELYTRA_SWITCH = new ElytraSwitch();
 
 
     public static final ToggledModule[] TOGGLED_MODULES = new ToggledModule[] {
-            SPECTATOR_SIGHT,
-            ATTACK_ASSISTANCE,
+            FLY_HACK,
             RENDER_TWEAKS,
             AUTO_ATTACK,
+            BOAT_FLY,
             ELYTRA_SWITCH,
             NO_ARMOR_RENDER
     };
@@ -50,7 +50,7 @@ public class ClientEntrypoint implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        // Register functions for hacks
+        // Register functions for modules
         for (ToggledModule module : TOGGLED_MODULES) {
             KeyBindingHelper.registerKeyBinding(module.keybind);  // Keybinds
             ClientTickEvents.END_CLIENT_TICK.register(module::tick);  // Every tick
@@ -61,7 +61,11 @@ public class ClientEntrypoint implements ClientModInitializer {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> registerServerCommands(dispatcher));  // Server Commands
 
         HudRenderCallback.EVENT.register(Gui::render);  // Render GUI
+
+        // Register the Notifier
+        new Notifier();
     }
+
 
     public static void tickEnd(MinecraftClient client) {
         // Update variables
@@ -81,7 +85,8 @@ public class ClientEntrypoint implements ClientModInitializer {
 
     public static void registerClientCommands(CommandDispatcher<FabricClientCommandSource> dispatcher) {
         ClipCommand.register(dispatcher);
-        DisablerGuiCommand.register(dispatcher);
+        GuiCommand.register(dispatcher);
+        ArmorRenderCommand.register(dispatcher);
     }
 
 
@@ -90,4 +95,4 @@ public class ClientEntrypoint implements ClientModInitializer {
         GetCodeCommand.register(dispatcher);
     }
 }
-//TODO: Bow switch, Flight(without bypass but with no fall).
+//TODO: Bow switch

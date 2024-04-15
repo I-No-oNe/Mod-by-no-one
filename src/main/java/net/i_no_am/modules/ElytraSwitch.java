@@ -24,7 +24,7 @@ public class ElytraSwitch extends ToggledModule {
     private boolean usingElytra = false;
 
     public ElytraSwitch() {
-        super("ElytraSwitch", GLFW.GLFW_KEY_R);
+        super("Elytra Switch", GLFW.GLFW_KEY_UNKNOWN);
         initializeChestplateMap();
     }
 
@@ -37,9 +37,10 @@ public class ElytraSwitch extends ToggledModule {
     }
 
     @Override
-    public void onEnable() {
+    public void tick(MinecraftClient client) {
+        super.tick(client);
         if (ELYTRA_SWITCH.enabled) {
-            ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            ClientTickEvents.END_CLIENT_TICK.register(clientTick -> {
                 if (usingElytra && wait(20)) { // Wait 20 ticks (1 second)
                     switchToRocket();
                     usingElytra = false;
@@ -55,6 +56,7 @@ public class ElytraSwitch extends ToggledModule {
             });
         }
     }
+
 
     private boolean isPlayerJumping() {
         MinecraftClient minecraft = MinecraftClient.getInstance();

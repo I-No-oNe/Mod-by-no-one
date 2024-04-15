@@ -7,14 +7,15 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static net.i_no_am.client.ClientEntrypoint.SPECTATOR_SIGHT;
+import static net.i_no_am.client.ClientEntrypoint.RENDER_TWEAKS;
+
 
 @Mixin(Entity.class)
 public abstract class MixinEntity {
 
     @Inject(method = "isInvisibleTo", at = @At("HEAD"), cancellable = true)
     private void overrideIsInvisibleToPlayer(PlayerEntity player, CallbackInfoReturnable<Boolean> cir) {
-        if (SPECTATOR_SIGHT.enabled) {
+        if (RENDER_TWEAKS.enabled) {
             if ((Object)this instanceof PlayerEntity) { // Check if the entity is a player
                 cir.setReturnValue(false); // Return false for player entities
             }

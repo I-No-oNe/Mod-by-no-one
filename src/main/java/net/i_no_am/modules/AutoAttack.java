@@ -22,7 +22,7 @@ public class AutoAttack extends ToggledModule {
     private static final Random random = new Random();
 
     public AutoAttack() {
-        super("AutoAttack", GLFW.GLFW_KEY_M);
+        super("Auto Attack", GLFW.GLFW_KEY_UNKNOWN);
     }
 
     @Override

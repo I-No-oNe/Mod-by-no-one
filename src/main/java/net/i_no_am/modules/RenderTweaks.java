@@ -6,6 +6,6 @@ import org.lwjgl.glfw.GLFW;
 public class RenderTweaks extends ToggledModule {
 
     public RenderTweaks() {
-        super("RenderTweaks", GLFW.GLFW_KEY_C);
+        super("Render Tweaks", GLFW.GLFW_KEY_UNKNOWN);
     }
 }
