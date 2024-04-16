@@ -25,6 +25,8 @@ public class ClientEntrypoint implements ClientModInitializer {
 
     public static final AutoAttack AUTO_ATTACK = new AutoAttack();
 
+    public static final FastMine FAST_MINE = new FastMine();
+
     public static final RenderTweaks RENDER_TWEAKS = new RenderTweaks();
 
     public static final FlyHack FLY_HACK = new FlyHack();
@@ -38,6 +40,7 @@ public class ClientEntrypoint implements ClientModInitializer {
     public static final ToggledModule[] TOGGLED_MODULES = new ToggledModule[] {
             FLY_HACK,
             RENDER_TWEAKS,
+            FAST_MINE,
             AUTO_ATTACK,
             BOAT_FLY,
             ELYTRA_SWITCH,
@@ -93,4 +96,3 @@ public class ClientEntrypoint implements ClientModInitializer {
         GetCodeCommand.register(dispatcher);
     }
 }
-//TODO: Bow switch

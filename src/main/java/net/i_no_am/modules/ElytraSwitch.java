@@ -41,11 +41,10 @@ public class ElytraSwitch extends ToggledModule {
         super.tick(client);
         if (ELYTRA_SWITCH.enabled) {
             ClientTickEvents.END_CLIENT_TICK.register(clientTick -> {
-                if (usingElytra && wait(20)) { // Wait 20 ticks (1 second)
-                    switchToRocket();
+                if (ELYTRA_SWITCH.enabled && usingElytra && wait(20)) { // Wait 20 ticks (1 second)
                     usingElytra = false;
                 } else {
-                    if (isPlayerJumping()) {
+                    if (isPlayerJumping()&& ELYTRA_SWITCH.enabled) {
                         switchToElytra();
                         usingElytra = true;
                     } else {
@@ -73,15 +72,10 @@ public class ElytraSwitch extends ToggledModule {
     }
     private void switchToElytra() {
         if (SwitchUtils.search(ELYTRA)) {
-            InteractionUtils.inputUse();
+           wait(15); InteractionUtils.inputUse();
         }
     }
 
-    private void switchToRocket() {
-        if (SwitchUtils.search(Items.FIREWORK_ROCKET)) {
-            InteractionUtils.inputUse();
-        }
-    }
 
     private boolean wait(int ticks) {
         tickCounter++;
