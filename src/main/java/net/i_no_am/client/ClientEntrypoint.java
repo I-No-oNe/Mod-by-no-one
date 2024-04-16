@@ -33,6 +33,8 @@ public class ClientEntrypoint implements ClientModInitializer {
 
     public static final BoatFly BOAT_FLY = new BoatFly();
 
+public static final FreeCamera FREE_CAMERA = new FreeCamera();
+
 
     public static final ElytraSwitch ELYTRA_SWITCH = new ElytraSwitch();
 
@@ -43,6 +45,7 @@ public class ClientEntrypoint implements ClientModInitializer {
             FAST_MINE,
             AUTO_ATTACK,
             BOAT_FLY,
+            FREE_CAMERA,
             ELYTRA_SWITCH,
             NO_ARMOR_RENDER
     };
