@@ -2,7 +2,7 @@ package net.i_no_am.client;
 
 import net.i_no_am.command.*;
 import net.i_no_am.modules.*;
-import net.i_no_am.mixin.ClientConnectionInvoker;
+import net.i_no_am.mixin.accesors.ClientConnectionInvoker;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
@@ -61,8 +61,6 @@ public class ClientEntrypoint implements ClientModInitializer {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> registerServerCommands(dispatcher));  // Server Commands
 
         HudRenderCallback.EVENT.register(Gui::render);  // Render GUI
-
-        // Register the Notifier
         new Notifier();
     }
 

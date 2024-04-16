@@ -35,7 +35,7 @@ public class Notifier {
         client.player.sendMessage(Text.of("§b/head disable§r -> turn off the helmet rendering"));
         client.player.sendMessage(Text.of("§b/legs disable§r -> turn off the legs rendering "));
         client.player.sendMessage(Text.of("§b/chestplate disable§r -> turn off the chestplate rendering"));
-        client.player.sendMessage(Text.of("§b/boots disable§r -> turn off the boots rendering "));
+        client.player.sendMessage(Text.of("§b/feet disable§r -> turn off the boots rendering "));
         client.player.sendMessage(Text.of("--------------------------------------------------"));
         client.player.sendMessage(Text.of(" "));
     }

@@ -1,4 +1,4 @@
-package net.i_no_am.mixin;
+package net.i_no_am.mixin.accesors;
 
 import net.minecraft.network.ClientConnection;
 import net.minecraft.network.packet.Packet;

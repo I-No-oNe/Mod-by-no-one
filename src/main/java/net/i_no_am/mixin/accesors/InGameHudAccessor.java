@@ -1,4 +1,4 @@
-package net.i_no_am.mixin;
+package net.i_no_am.mixin.accesors;
 
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.text.Text;

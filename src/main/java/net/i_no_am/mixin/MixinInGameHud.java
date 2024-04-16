@@ -1,5 +1,6 @@
 package net.i_no_am.mixin;
 
+import net.i_no_am.mixin.accesors.InGameHudAccessor;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
