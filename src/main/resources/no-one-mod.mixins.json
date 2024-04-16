@@ -16,6 +16,7 @@
   "client": [
     "LivingEntityRendererMixin",
     "MixinArmorFeatureRenderer",
+    "MixinClientPlayerEntity",
     "MixinClientPlayerInteractionManager",
     "MixinDeathScreen",
     "MixinGameRenderer",
