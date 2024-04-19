@@ -25,17 +25,20 @@ public class FreeCamera extends ToggledModule {
         if (isEnabled && !wasEnabled) {
             // Save the player's position when enabling the module
             savedPosition = player.getPos();
-            // Set player to swimming state
-//            player.setSwimming(true);
         }
 
         if (isEnabled) {
             double speed = 0.6;
             Vec3d motion = Vec3d.ZERO;
-            if (client.options.backKey.isPressed()) motion = motion.add(0, 0, -speed);
-            if (client.options.forwardKey.isPressed()) motion = motion.add(0, 0, speed);
-            if (client.options.rightKey.isPressed()) motion = motion.add(-speed, 0, 0);
-            if (client.options.leftKey.isPressed()) motion = motion.add(speed, 0, 0);
+
+            // Get the player's look vector
+            Vec3d lookVector = player.getRotationVector();
+
+            // Calculate motion based on the player's facing direction
+            if (client.options.backKey.isPressed()) motion = motion.add(lookVector.multiply(-speed, 0, -speed));
+            if (client.options.forwardKey.isPressed()) motion = motion.add(lookVector.multiply(speed, 0, speed));
+            if (client.options.leftKey.isPressed()) motion = motion.add(lookVector.rotateY(90).multiply(speed, 0, speed));
+            if (client.options.rightKey.isPressed()) motion = motion.add(lookVector.rotateY(-90).multiply(speed, 0, speed));
             if (client.options.jumpKey.isPressed()) motion = motion.add(0, speed, 0);
             if (client.options.sneakKey.isPressed()) motion = motion.add(0, -speed, 0);
 
