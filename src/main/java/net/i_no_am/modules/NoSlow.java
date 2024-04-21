@@ -5,6 +5,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.Block;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.Objects;
@@ -22,12 +23,14 @@ public class NoSlow extends ToggledModule {
         super.tick(client);
 
         if (NO_SLOW.enabled && client.player != null) {
-            Vec3d playerVelocity = client.player.getVelocity();
-            if (shouldRemoveSlowingEffects(client)) {
-                client.player.clearStatusEffects();
+            if (client.player.isOnGround()) { // Check if player is on the ground
+                Vec3d playerVelocity = client.player.getVelocity();
+                if (shouldRemoveSlowingEffects(client)) {
+                    client.player.clearStatusEffects();
+                }
+                playerVelocity = adjustPlayerVelocity(playerVelocity, client);
+                client.player.setVelocity(playerVelocity);
             }
-            playerVelocity = adjustPlayerVelocity(playerVelocity, client);
-            client.player.setVelocity(playerVelocity);
         }
     }
 
@@ -46,7 +49,7 @@ public class NoSlow extends ToggledModule {
         }
 
         if (NO_SLOW.enabled && (client.player.isUsingItem() || client.player.isSneaking())) {
-            adjustedVelocity = adjustedVelocity.multiply(1.4, 1, 1.4);
+            adjustedVelocity = adjustedVelocity.multiply(1.6, 1, 1.6);
         }
         return adjustedVelocity;
     }
@@ -54,6 +57,7 @@ public class NoSlow extends ToggledModule {
     private boolean isOnBlock(MinecraftClient client) {
         Vec3d playerPos = Objects.requireNonNull(client.player).getPos();
         BlockPos blockPos = new BlockPos((int) playerPos.x, (int) playerPos.y, (int) playerPos.z);
-        return Objects.requireNonNull(client.world).getBlockState(blockPos.down()).isOf(Blocks.SOUL_SAND);
+        Block block = Objects.requireNonNull(client.world).getBlockState(blockPos.down()).getBlock();
+        return block == Blocks.SOUL_SAND || block == Blocks.COBWEB;
     }
 }

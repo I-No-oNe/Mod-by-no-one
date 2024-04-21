@@ -5,5 +5,8 @@
   "key.i_no_am.autoattack_toggle": "Toggle Auto Attack",
   "key.i_no_am.elytraswitch_toggle": "Toggle Elytra Switch",
   "key.i_no_am.flyhack_toggle": "Toggle Fly hack",
-  "key.i_no_am.boatfly_toggle": "Toggle Boat Fly"
+  "key.i_no_am.freecamera_toggle": "Toggle Free Camera",
+  "key.i_no_am.noslow_toggle": "Toggle No Slow",
+  "key.i_no_am.boatfly_toggle": "Toggle Boat Fly",
+  "key.i_no_am.fastmine_toggle": "Toggle Fast Mine"
 }
