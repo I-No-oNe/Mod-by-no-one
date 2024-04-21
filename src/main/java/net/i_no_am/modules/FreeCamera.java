@@ -1,13 +1,21 @@
 package net.i_no_am.modules;
 
+import net.i_no_am.client.Global;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.glfw.GLFW;
 
-public class FreeCamera extends ToggledModule {
+import static net.i_no_am.NoOneMod.PREFIX;
+
+public class FreeCamera extends ToggledModule implements Global {
+    private static double cameraSpeed = 2.0;
     private boolean wasEnabled = false;
+    private boolean warningSent = false;
     private Vec3d savedPosition;
+    private boolean resetVelocity = false;
 
     public FreeCamera() {
         super("Free Camera", GLFW.GLFW_KEY_UNKNOWN);
@@ -21,20 +29,15 @@ public class FreeCamera extends ToggledModule {
         if (player == null) return;
 
         boolean isEnabled = isEnabled();
-
         if (isEnabled && !wasEnabled) {
-            // Save the player's position when enabling the module
             savedPosition = player.getPos();
         }
 
         if (isEnabled) {
-            double speed = 0.6;
             Vec3d motion = Vec3d.ZERO;
-
-            // Get the player's look vector
             Vec3d lookVector = player.getRotationVector();
+            double speed = cameraSpeed;
 
-            // Calculate motion based on the player's facing direction
             if (client.options.backKey.isPressed()) motion = motion.add(lookVector.multiply(-speed, 0, -speed));
             if (client.options.forwardKey.isPressed()) motion = motion.add(lookVector.multiply(speed, 0, speed));
             if (client.options.leftKey.isPressed()) motion = motion.add(lookVector.rotateY(90).multiply(speed, 0, speed));
@@ -42,15 +45,36 @@ public class FreeCamera extends ToggledModule {
             if (client.options.jumpKey.isPressed()) motion = motion.add(0, speed, 0);
             if (client.options.sneakKey.isPressed()) motion = motion.add(0, -speed, 0);
 
-            // Set player velocity for smooth movement
             player.setVelocity(motion);
         } else {
-            // Restore the player's position when disabling the module
-            if (wasEnabled) {
-                player.updatePosition(savedPosition.x, savedPosition.y, savedPosition.z);
+            if (resetVelocity) {
+                player.setVelocity(Vec3d.ZERO);
+                resetVelocity = false;
+            }
+
+            if (wasEnabled && !warningSent) {
+                player.sendMessage(Text.of(PREFIX + Formatting.RED + "You have disabled the Free camera module."), false);
+                warningSent = true;
+            }
+
+            if (!isEnabled() && wasEnabled) {
+                if (savedPosition != null) {
+                    player.updatePosition(savedPosition.x, savedPosition.y, savedPosition.z);
+                    savedPosition = null;
+                }
             }
         }
 
         wasEnabled = isEnabled;
+    }
+
+    @Override
+    public void onDisable() {
+        super.onDisable();
+        resetVelocity = true;
+    }
+
+    public static void setSpeed(double speed) {
+        cameraSpeed = speed;
     }
 }

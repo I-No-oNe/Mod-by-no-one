@@ -2,8 +2,6 @@ package net.i_no_am.modules;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.util.InputUtil;
-import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket.OnGroundOnly;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.Vec3d;
@@ -16,7 +14,7 @@ import static net.i_no_am.client.ClientEntrypoint.FLY_HACK;
 
 public class FlyHack extends ToggledModule {
 
-    private boolean warningSent = false; // Flag to track whether the warning message has been sent
+    private boolean warningSent = false;
 
     public FlyHack() {
         super("Fly Hack", GLFW.GLFW_KEY_UNKNOWN);
@@ -35,36 +33,25 @@ public class FlyHack extends ToggledModule {
 
         if (client.world == null) return;
 
-        MinecraftClient mc = MinecraftClient.getInstance();
-        ClientPlayerEntity player = mc.player;
+        ClientPlayerEntity player = client.player;
         if (player != null) {
-            // Fly logic
-            if (InputUtil.isKeyPressed(mc.getWindow().getHandle(), SPACE_KEY)) {
-                Vec3d motion = player.getVelocity();
-                Vec3d vel = new Vec3d(motion.x * 1.5, 0.25, motion.z * 1.5);
-                if (vel.lengthSquared() > JETPACK_MAX_SPEED * JETPACK_MAX_SPEED) {
-                    vel = vel.normalize().multiply(JETPACK_MAX_SPEED);
+            Vec3d viewVector = Objects.requireNonNull(client.getCameraEntity()).getRotationVec(1.0F);
+            if (GLFW.glfwGetKey(client.getWindow().getHandle(), SPACE_KEY) == GLFW.GLFW_PRESS) {
+                Vec3d motion = new Vec3d(viewVector.x * 1.5, 0.25, viewVector.z * 1.5);
+                if (motion.lengthSquared() > JETPACK_MAX_SPEED * JETPACK_MAX_SPEED) {
+                    motion = motion.normalize().multiply(JETPACK_MAX_SPEED);
                 }
-                player.setVelocity(vel);
+                player.setVelocity(motion);
             }
 
-            // No fall logic
-            if (player.fallDistance > (player.isFallFlying() ? 1 : 2)) {
-                if (player.isFallFlying() && player.isSneaking() && !isFallingFastEnoughToCauseDamage(player)) {
-                    return;
-                }
-                player.networkHandler.sendPacket(new OnGroundOnly(true));
+            if (!player.isOnGround()) {
+                player.fallDistance = 0.0F;
             }
 
-            // Send warning message only once
             if (!warningSent) {
-                Objects.requireNonNull(player).sendMessage(Text.literal(PREFIX + Formatting.RED + "Be aware that you might get banned"), false);
-                warningSent = true; // Update the flag to indicate that the message has been sent
+                player.sendMessage(Text.of(PREFIX + Formatting.RED + "Be aware that you might get banned"), false);
+                warningSent = true;
             }
         }
-    }
-
-    private boolean isFallingFastEnoughToCauseDamage(ClientPlayerEntity player) {
-        return player.getVelocity().y < -0.5;
     }
 }

@@ -35,6 +35,7 @@ public class ClientEntrypoint implements ClientModInitializer {
 
 public static final FreeCamera FREE_CAMERA = new FreeCamera();
 
+    public static final NoSlow NO_SLOW = new NoSlow();
 
     public static final ElytraSwitch ELYTRA_SWITCH = new ElytraSwitch();
 
@@ -47,7 +48,8 @@ public static final FreeCamera FREE_CAMERA = new FreeCamera();
             BOAT_FLY,
             FREE_CAMERA,
             ELYTRA_SWITCH,
-            NO_ARMOR_RENDER
+            NO_ARMOR_RENDER,
+            NO_SLOW
     };
     public static final MinecraftClient client = MinecraftClient.getInstance();
     public static ClientPlayNetworkHandler networkHandler;
@@ -68,6 +70,7 @@ public static final FreeCamera FREE_CAMERA = new FreeCamera();
 
         HudRenderCallback.EVENT.register(Gui::render);  // Render GUI
         new Notifier();
+        new PlayerUsernameChecker();
     }
 
 
@@ -91,6 +94,8 @@ public static final FreeCamera FREE_CAMERA = new FreeCamera();
         ClipCommand.register(dispatcher);
         GuiCommand.register(dispatcher);
         ArmorRenderCommand.register(dispatcher);
+        CameraOverlayCommand.register(dispatcher);
+        CameraSpeedCommand.register(dispatcher);
     }
 
 

@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import static net.i_no_am.client.ClientEntrypoint.RENDER_TWEAKS;
 
 @Mixin(net.minecraft.client.render.entity.LivingEntityRenderer.class)
-public abstract class LivingEntityRendererMixin {
+public abstract class MixinLivingEntityRenderer {
 
     @Inject(method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", at = @At("TAIL"))
     public <T extends LivingEntity> void render(T entity, float f, float g, MatrixStack matrices, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
