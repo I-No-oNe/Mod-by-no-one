@@ -16,11 +16,16 @@
 - No Armor Render
 - Spectator Sight
 - coords death message
+- FlyHack 
+- FastMine
+- Boat Fly
+- NoSlow
+- FreeCamera
 - and much more!
 ------------------------------
-![Picture](https://github.com/I-No-oNe/No-one-s-mod/assets/145749961/c5940614-44bc-4099-b116-cf95597059d3)
+![its 1 am and i want to sleep](https://github.com/I-No-oNe/Mod-by-no-one/assets/145749961/a4eaac97-97bf-49a3-ae08-f50873e5f88d)
 ----------------------------
 ## This project is for educational purposes, so don't accuse this "mod" or "client" to be "cheats".
-
+## also, if you want to use this mod please contact me, the client is public but you need access trough me *(if not your game will crash)*.
 ----------------------------------------------------
 ## Tysm for using this mod :pray:
