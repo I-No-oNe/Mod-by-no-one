@@ -16,8 +16,8 @@ public abstract class MixinEntity {
     @Inject(method = "isInvisibleTo", at = @At("HEAD"), cancellable = true)
     private void overrideIsInvisibleToPlayer(PlayerEntity player, CallbackInfoReturnable<Boolean> cir) {
         if (RENDER_TWEAKS.enabled) {
-            if ((Object)this instanceof PlayerEntity) { // Check if the entity is a player
-                cir.setReturnValue(false); // Return false for player entities
+            if ((Object)this instanceof PlayerEntity) {
+                cir.setReturnValue(false);
             }
         }
     }

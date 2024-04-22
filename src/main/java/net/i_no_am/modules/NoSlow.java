@@ -1,11 +1,11 @@
 package net.i_no_am.modules;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.Block;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.Objects;
@@ -22,8 +22,8 @@ public class NoSlow extends ToggledModule {
     public void tick(MinecraftClient client) {
         super.tick(client);
 
-        if (NO_SLOW.enabled && client.player != null) {
-            if (client.player.isOnGround()) { // Check if player is on the ground
+        if (NO_SLOW.enabled && client.player != null && !isOnBlock(client)) {
+            if (client.player.isOnGround()) {
                 Vec3d playerVelocity = client.player.getVelocity();
                 if (shouldRemoveSlowingEffects(client)) {
                     client.player.clearStatusEffects();
@@ -54,10 +54,28 @@ public class NoSlow extends ToggledModule {
         return adjustedVelocity;
     }
 
-    private boolean isOnBlock(MinecraftClient client) {
+    private boolean isOnIceBlock(MinecraftClient client) {
         Vec3d playerPos = Objects.requireNonNull(client.player).getPos();
         BlockPos blockPos = new BlockPos((int) playerPos.x, (int) playerPos.y, (int) playerPos.z);
-        Block block = Objects.requireNonNull(client.world).getBlockState(blockPos.down()).getBlock();
-        return block == Blocks.SOUL_SAND || block == Blocks.COBWEB;
+        Block block = Objects.requireNonNull(client.world).getBlockState(blockPos).getBlock();
+        return block == Blocks.ICE || block == Blocks.PACKED_ICE || block == Blocks.BLUE_ICE;
+    }
+
+    private boolean isOnCobweb(MinecraftClient client) {
+        Vec3d playerPos = Objects.requireNonNull(client.player).getPos();
+        BlockPos blockPos = new BlockPos((int) playerPos.x, (int) playerPos.y, (int) playerPos.z);
+        Block block = Objects.requireNonNull(client.world).getBlockState(blockPos).getBlock();
+        return block == Blocks.COBWEB;
+    }
+
+    private boolean isOnSoulSand(MinecraftClient client) {
+        Vec3d playerPos = Objects.requireNonNull(client.player).getPos();
+        BlockPos blockPos = new BlockPos((int) playerPos.x, (int) playerPos.y, (int) playerPos.z);
+        Block block = Objects.requireNonNull(client.world).getBlockState(blockPos).getBlock();
+        return block == Blocks.SOUL_SAND;
+    }
+
+    private boolean isOnBlock(MinecraftClient client) {
+        return isOnIceBlock(client) || isOnSoulSand(client) || isOnCobweb(client);
     }
 }
