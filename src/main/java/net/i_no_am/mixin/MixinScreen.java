@@ -11,8 +11,22 @@ import static net.i_no_am.client.ClientEntrypoint.RENDER_TWEAKS;
 
 @Mixin(Screen.class)
 public abstract class MixinScreen {
+    @Inject(method = "applyBlur", at = @At("HEAD"), cancellable = true)
+    private void applyBlur(CallbackInfo info) {
+        if (RENDER_TWEAKS.enabled) {
+            info.cancel();
+        }
+    }
+
     @Inject(method = "renderBackground", at = @At("HEAD"), cancellable = true)
-    private void onRenderBackground(CallbackInfo info) {
+    private void renderBackground(CallbackInfo info) {
+        if (RENDER_TWEAKS.enabled) {
+            info.cancel();
+        }
+    }
+
+    @Inject(method = "renderInGameBackground", at = @At("HEAD"), cancellable = true)
+    private void renderInGameBackground(CallbackInfo info) {
         if (RENDER_TWEAKS.enabled) {
             info.cancel();
         }

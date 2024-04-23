@@ -44,8 +44,8 @@ public class FlyHack extends ToggledModule {
                 player.setVelocity(motion);
             }
 
-            if (!player.isOnGround()) {
-                player.fallDistance = 0.0F;
+            if (player.fallDistance > 2 && !isFallingFastEnoughToCauseDamage(player)) {
+                player.fallDistance = 0;
             }
 
             if (!warningSent) {
@@ -53,5 +53,9 @@ public class FlyHack extends ToggledModule {
                 warningSent = true;
             }
         }
+    }
+
+    private boolean isFallingFastEnoughToCauseDamage(ClientPlayerEntity player) {
+        return player.getVelocity().y < -0.5;
     }
 }
