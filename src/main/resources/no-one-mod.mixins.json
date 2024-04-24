@@ -4,8 +4,10 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "MixinClientConnection",
+    "MixinDataPackSettings",
     "MixinEntity",
     "MixinItemStack",
+    "MixinLevelProperties",
     "MixinLivingEntity",
     "MixinPlayerEntity",
     "accesors.ClientConnectionInvoker"
@@ -15,14 +17,17 @@
   },
   "client": [
     "MixinArmorFeatureRenderer",
+    "MixinClientBrandRetriever",
     "MixinClientPlayerEntity",
     "MixinClientPlayerInteractionManager",
     "MixinDeathScreen",
+    "MixinDebugHud",
     "MixinGameRenderer",
     "MixinInGameHud",
     "MixinLightmapTextureManager",
     "MixinLivingEntityRenderer",
     "MixinMinecraftClient",
+    "MixinPackScreen",
     "MixinScreen",
     "MixinSession",
     "MixinSplashTextResourceSupplier",

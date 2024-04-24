@@ -31,6 +31,8 @@ public class ClientEntrypoint implements ClientModInitializer {
 
     public static final FlyHack FLY_HACK = new FlyHack();
 
+    public static final Scaffold SCAFFOLD = new Scaffold();
+
     public static final BoatFly BOAT_FLY = new BoatFly();
 
 public static final FreeCamera FREE_CAMERA = new FreeCamera();
@@ -49,7 +51,8 @@ public static final FreeCamera FREE_CAMERA = new FreeCamera();
             FREE_CAMERA,
             ELYTRA_SWITCH,
             NO_ARMOR_RENDER,
-            NO_SLOW
+            NO_SLOW,
+            SCAFFOLD
     };
     public static final MinecraftClient client = MinecraftClient.getInstance();
     public static ClientPlayNetworkHandler networkHandler;
@@ -96,6 +99,7 @@ public static final FreeCamera FREE_CAMERA = new FreeCamera();
         ArmorRenderCommand.register(dispatcher);
         CameraOverlayCommand.register(dispatcher);
         CameraSpeedCommand.register(dispatcher);
+        ClientFakerCommand.register(dispatcher);
     }
 
 
