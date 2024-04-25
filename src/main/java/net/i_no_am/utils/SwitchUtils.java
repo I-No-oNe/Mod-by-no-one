@@ -1,13 +1,12 @@
 package net.i_no_am.utils;
 
-import net.minecraft.client.MinecraftClient;
+import net.i_no_am.client.Global;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 
-public class SwitchUtils {
+public class SwitchUtils implements Global {
 
     public static boolean search(Item item) {
-        MinecraftClient mc = MinecraftClient.getInstance(); // Initialize mc
 
         if (mc.player == null) {
             return false;

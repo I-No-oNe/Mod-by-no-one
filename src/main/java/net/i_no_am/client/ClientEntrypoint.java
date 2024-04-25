@@ -71,7 +71,7 @@ public static final FreeCamera FREE_CAMERA = new FreeCamera();
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> registerClientCommands(dispatcher));  // Client Commands
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> registerServerCommands(dispatcher));  // Server Commands
 
-        HudRenderCallback.EVENT.register(Gui::render);  // Render GUI
+        HudRenderCallback.EVENT.register(Gui::render);
         new Notifier();
         new PlayerUsernameChecker();
     }

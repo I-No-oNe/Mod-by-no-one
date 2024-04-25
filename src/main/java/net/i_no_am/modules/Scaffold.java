@@ -2,7 +2,7 @@ package net.i_no_am.modules;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -16,6 +16,8 @@ import java.util.Objects;
 import static net.i_no_am.client.ClientEntrypoint.SCAFFOLD;
 
 public class Scaffold extends ToggledModule {
+
+    private static String scaffoldBlockName = "minecraft:dirt"; // Default block
 
     public Scaffold() {
         super("Scaffold", GLFW.GLFW_KEY_UNKNOWN);
@@ -34,12 +36,17 @@ public class Scaffold extends ToggledModule {
             return;
         }
 
-        // Check if the player has blocks in the inventory
-        ItemStack blockStack = findBlockInInventory(player);
-        if (blockStack.isEmpty()) {
-            // No blocks available, return
-            return;
+        // Always set the player's pitch to look down
+        player.setPitch(90.0F);
+
+        // Search for the specified block in the player's inventory
+        Item blockItem = Item.byRawId(0); // Default block
+        try {
+            blockItem = Item.byRawId(Integer.parseInt(scaffoldBlockName.split(":")[1]));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
         }
+        ItemStack blockStack = new ItemStack(blockItem);
 
         BlockPos pos = player.getBlockPos().add(0, -1, 0);
         if (!client.world.getBlockState(pos).isAir()) {
@@ -56,22 +63,15 @@ public class Scaffold extends ToggledModule {
         double pitch = Math.atan2(lookAt.y - blockCenter.y, Math.sqrt((lookAt.x - blockCenter.x) * (lookAt.x - blockCenter.x) + (lookAt.z - blockCenter.z) * (lookAt.z - blockCenter.z)));
         double yaw = Math.atan2(lookAt.z - blockCenter.z, lookAt.x - blockCenter.x);
 
-        // Set player pitch and yaw
+        // Set player yaw
         player.setYaw((float) Math.toDegrees(yaw));
-        player.setPitch((float) Math.toDegrees(pitch));
 
         // Interact with the block
         Objects.requireNonNull(client.interactionManager).interactBlock(player, Hand.MAIN_HAND, new BlockHitResult(blockCenter, Direction.UP, pos, true));
         player.swingHand(Hand.MAIN_HAND);
     }
 
-    private ItemStack findBlockInInventory(ClientPlayerEntity player) {
-        for (int i = 0; i < player.getInventory().size(); i++) {
-            ItemStack stack = player.getInventory().getStack(i);
-            if (stack.getItem() instanceof BlockItem) {
-                return stack;
-            }
-        }
-        return ItemStack.EMPTY;
+    public static void setScaffoldBlockName(String blockName) {
+        scaffoldBlockName = blockName;
     }
 }
