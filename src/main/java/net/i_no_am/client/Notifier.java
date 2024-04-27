@@ -25,7 +25,6 @@ public class Notifier {
         client.player.sendMessage(Text.of("§Inventory Tweaks:§r Press Mouse and shift to move items, Press Shift+q+ctrl to throw everything, Press number 0 to throw everything."));
         client.player.sendMessage(Text.of("§aElytra Switch:§r Automatically switch to elytra when jumping and switch to chestplate when on ground."));
         client.player.sendMessage(Text.of("§aAuto Attack:§r Automatically attack entities and surround the target with green circle."));
-        client.player.sendMessage(Text.of("§aNoSlow:§r Make your movement be normal in situations where u shouldn't be."));
         client.player.sendMessage(Text.of("§aFreeCamera:§r Make your camera move out of your body."));
         client.player.sendMessage(Text.of("§aBoat Fly:§r Make boats fly when you ride them."));
         client.player.sendMessage(Text.of("§aRender Tweaks:§r make the game look better."));
@@ -35,12 +34,13 @@ public class Notifier {
         client.player.sendMessage(Text.of("§aFastMine:§r Instant mine."));
         client.player.sendMessage(Text.of("--------------------------------------------------"));
         client.player.sendMessage(Text.of("                                 §6Commands:§r                                    "));
-        client.player.sendMessage(Text.of("§bfree_camera_speed §r-> let u decide the camera movement by input numbers."));
+        client.player.sendMessage(Text.of("§b/vanillaclient-> make the client back to fabric,help hiding from servers that you are using fabric."));
+        client.player.sendMessage(Text.of("§b/free_camera_speed §r-> let u decide the camera movement by input numbers."));
         client.player.sendMessage(Text.of("§b/gui disable §r-> turn off the gui | §b/gui enable §r-> turn on the gui."));
         client.player.sendMessage(Text.of("§b/vclip §8{number} §r-> teleport the player §8{numbers}§r blocks."));
         client.player.sendMessage(Text.of("§b/dclip §8{number} §r-> teleport the player §8{numbers}§r blocks."));
         client.player.sendMessage(Text.of("§b/hclip §8{number} §r-> teleport the player §8{numbers}§r blocks."));
-        client.player.sendMessage(Text.of("§bcamera_overlay §r-> Turn on a green overlay when FreeCamera is on."));
+        client.player.sendMessage(Text.of("§b/camera_overlay §r-> Turn on a green overlay when FreeCamera is on."));
         client.player.sendMessage(Text.of("§b/head disable§r -> turn off the helmet rendering."));
         client.player.sendMessage(Text.of("§b/legs disable§r -> turn off the legs rendering."));
         client.player.sendMessage(Text.of("§b/chestplate disable§r -> turn off the chestplate rendering."));
