@@ -20,6 +20,7 @@ import net.minecraft.server.command.ServerCommandSource;
 
 import java.util.LinkedList;
 
+@SuppressWarnings("ALL")
 public class ClientEntrypoint implements ClientModInitializer {
     public static final NoArmorRender NO_ARMOR_RENDER = new NoArmorRender();
 
@@ -37,9 +38,9 @@ public class ClientEntrypoint implements ClientModInitializer {
 
 public static final FreeCamera FREE_CAMERA = new FreeCamera();
 
-    public static final NoSlow NO_SLOW = new NoSlow();
+public static final InventoryTweaks INVENTORY_TWEAKS = new InventoryTweaks();
 
-    public static final ElytraSwitch ELYTRA_SWITCH = new ElytraSwitch();
+public static final ElytraSwitch ELYTRA_SWITCH = new ElytraSwitch();
 
 
     public static final ToggledModule[] TOGGLED_MODULES = new ToggledModule[] {
@@ -51,7 +52,7 @@ public static final FreeCamera FREE_CAMERA = new FreeCamera();
             FREE_CAMERA,
             ELYTRA_SWITCH,
             NO_ARMOR_RENDER,
-            NO_SLOW,
+            INVENTORY_TWEAKS,
             SCAFFOLD
     };
     public static final MinecraftClient client = MinecraftClient.getInstance();
@@ -78,7 +79,6 @@ public static final FreeCamera FREE_CAMERA = new FreeCamera();
 
 
     public static void tickEnd(MinecraftClient client) {
-        // Update variables
         networkHandler = client.getNetworkHandler();
         globalTimer++;
 

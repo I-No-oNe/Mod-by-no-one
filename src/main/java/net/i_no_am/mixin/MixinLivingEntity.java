@@ -17,11 +17,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Collection;
 import java.util.Map;
 
-import static net.i_no_am.client.ClientEntrypoint.NO_SLOW;
 import static net.i_no_am.client.ClientEntrypoint.RENDER_TWEAKS;
 import static net.minecraft.block.Blocks.COBWEB;
 import static net.minecraft.block.Blocks.SOUL_SAND;
 
+@SuppressWarnings("ALL")
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity {
 
@@ -34,9 +34,6 @@ public abstract class MixinLivingEntity {
         if (RENDER_TWEAKS.enabled) {
             activeStatusEffects.remove(StatusEffects.BLINDNESS);
             activeStatusEffects.remove(StatusEffects.DARKNESS);
-            if (NO_SLOW.enabled) {
-                activeStatusEffects.remove(StatusEffects.SLOWNESS);
-            }
             cir.setReturnValue(activeStatusEffects.values());
         }
     }

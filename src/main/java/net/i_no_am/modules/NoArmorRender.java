@@ -12,7 +12,6 @@ public class NoArmorRender extends ToggledModule {
 
     public NoArmorRender() {
         super("No Armor Render", GLFW.GLFW_KEY_UNKNOWN);
-        // Initialize the render status for all equipment slots to false (render disabled) by default
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             RENDER_STATUS.put(slot, false);
         }

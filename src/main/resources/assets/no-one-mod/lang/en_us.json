@@ -8,5 +8,8 @@
   "key.i_no_am.freecamera_toggle": "Toggle Free Camera",
   "key.i_no_am.noslow_toggle": "Toggle No Slow",
   "key.i_no_am.boatfly_toggle": "Toggle Boat Fly",
-  "key.i_no_am.fastmine_toggle": "Toggle Fast Mine"
+  "key.i_no_am.fastmine_toggle": "Toggle Fast Mine",
+  "key.i_no_am.scaffold_toggle": "Toggle Scaffold",
+  "key.i_no_am.inventorytweaks_toggle": "Toggle Inventory Tweaks"
+
 }

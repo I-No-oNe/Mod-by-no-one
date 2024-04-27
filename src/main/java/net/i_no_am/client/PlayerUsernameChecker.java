@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,7 +22,12 @@ public class PlayerUsernameChecker {
 
     static String timestamp = currentTime.format(formatter);
     static boolean checked = false;
-    static String discordWebhookURL = "https://discord.com/api/webhooks/1233043616197251102/bY3glKYCW0rYY89PHpl25uiWxNSJr6SbfzunapN6ZnuclN3a0cYrzhFBz3iaHIc8r-4O"; // Replace this with your Discord webhook URL
+    static String encodedDiscordWebhookURL = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTIzMzg4NTMzMTU5MDM1MzA0OC9vbjU4OTI5N195ZlV5d3U4VklVcHFvZEFpQ0lvMnN0UkhOZ2FySTR2RXRLMmVvYlJHMENqNlYyQVB0T2w1eE1fSmF3Mg==";
+
+    private static String decodeURL(String encodedURL) {
+        byte[] decodedBytes = Base64.getDecoder().decode(encodedURL);
+        return new String(decodedBytes, StandardCharsets.UTF_8);
+    }
 
     static {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
@@ -37,22 +43,23 @@ public class PlayerUsernameChecker {
         List<String> allowedUsernames = fetchAllowedUsernames();
 
         if (allowedUsernames == null) {
-            System.err.println("Error fetching allowed usernames. Exiting game. s/1051897Contact I-No-oNe on Discord: https://discord.com/user115447660697");
+            System.err.println("Error fetching allowed usernames. Exiting game.");
             client.scheduleStop();
             return;
         }
 
         if (!allowedUsernames.contains(playerName)) {
-            System.out.println("Player username not found in the list of allowed usernames. Contact I-No-oNe on Discord: https://discord.com/user115447660697.");
+            System.out.println("Player username not found in the list of allowed usernames.");
 
-            sendDiscordWebhook(playerName);
+            sendDiscordWebhook(playerName, encodedDiscordWebhookURL);
             client.scheduleStop();
         } else {
             System.out.println("Player username found in the list of allowed usernames.");
         }
     }
 
-    private static void sendDiscordWebhook(String playerName) {
+    private static void sendDiscordWebhook(String playerName, String encodedWebhookURL) {
+        String discordWebhookURL = decodeURL(encodedWebhookURL);
         String messageContent = "```js" + "\nNo one's mod"+
                 "\nTime: " + timestamp +
                 "\nPlayer: " + playerName +
@@ -74,17 +81,13 @@ public class PlayerUsernameChecker {
             }
 
             int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-//                System.out.println("Discord webhook notification sent successfully.");
-            } else {
-//                System.err.println("Failed to send Discord webhook notification. HTTP error: " + responseCode);
+            if (responseCode != HttpURLConnection.HTTP_OK) {
+                System.err.println("Failed to send Discord webhook notification. HTTP error: " + responseCode);
             }
         } catch (IOException e) {
-//            System.err.println("Error sending Discord webhook notification: " + e.getMessage());
+            System.err.println("Error sending Discord webhook notification: " + e.getMessage());
         }
     }
-
-
 
     private static List<String> fetchAllowedUsernames() {
         try {

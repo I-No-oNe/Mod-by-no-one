@@ -3,6 +3,8 @@ package net.i_no_am.utils;
 import net.i_no_am.client.Global;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Hand;
 
 public class SwitchUtils implements Global {
 
@@ -21,5 +23,13 @@ public class SwitchUtils implements Global {
             }
         }
         return false;
+    }
+    public static boolean nameContains(String contains, Hand hand) {
+        if (PlayerUtils.invalid()) {
+            return false;
+        }
+
+        ItemStack item = PlayerUtils.player().getStackInHand(hand);
+        return item != null && item.getTranslationKey().toLowerCase().contains(contains.toLowerCase());
     }
 }
