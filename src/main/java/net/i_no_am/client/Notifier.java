@@ -22,7 +22,7 @@ public class Notifier {
         assert client.player != null;
         client.player.sendMessage(Text.of(                                                              PREFIX ));
         client.player.sendMessage(Text.of("                               §6Modules:§r                                    "));
-        client.player.sendMessage(Text.of("§Inventory Tweaks:§r Press Mouse and shift to move items, Press Shift+q+ctrl to throw everything, Press number 0 to throw everything."));
+        client.player.sendMessage(Text.of("§aInventory Tweaks:§r Press Mouse and shift to move items, Press Shift+q+ctrl to throw everything, Press number 0 to throw everything."));
         client.player.sendMessage(Text.of("§aElytra Switch:§r Automatically switch to elytra when jumping and switch to chestplate when on ground."));
         client.player.sendMessage(Text.of("§aAuto Attack:§r Automatically attack entities and surround the target with green circle."));
         client.player.sendMessage(Text.of("§aFreeCamera:§r Make your camera move out of your body."));
@@ -34,7 +34,7 @@ public class Notifier {
         client.player.sendMessage(Text.of("§aFastMine:§r Instant mine."));
         client.player.sendMessage(Text.of("--------------------------------------------------"));
         client.player.sendMessage(Text.of("                                 §6Commands:§r                                    "));
-        client.player.sendMessage(Text.of("§b/vanillaclient-> make the client back to fabric,help hiding from servers that you are using fabric."));
+        client.player.sendMessage(Text.of("§b/vanillaclient §r-> make the client back to fabric,help hiding from servers that you are using fabric."));
         client.player.sendMessage(Text.of("§b/free_camera_speed §r-> let u decide the camera movement by input numbers."));
         client.player.sendMessage(Text.of("§b/gui disable §r-> turn off the gui | §b/gui enable §r-> turn on the gui."));
         client.player.sendMessage(Text.of("§b/vclip §8{number} §r-> teleport the player §8{numbers}§r blocks."));
