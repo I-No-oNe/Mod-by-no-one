@@ -1,6 +1,7 @@
 package net.i_no_am.modules;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.i_no_am.utils.FakePlayerEntityUtils;
 import net.i_no_am.utils.InteractionUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -25,8 +26,6 @@ public class AutoAttack extends ToggledModule {
     private static final Random random = new Random();
 
     private long lastAttackTime = 0;
-    private int shortDelay = 2; // Default short delay
-    private int longDelay = 50; // Default long delay
 
     public AutoAttack() {
         super("Auto Attack", GLFW.GLFW_KEY_UNKNOWN);
@@ -53,14 +52,20 @@ public class AutoAttack extends ToggledModule {
 
         if (!entityHitResult.getType().equals(EntityHitResult.Type.ENTITY)) return;
 
-        if (entityHitResult.getEntity() instanceof VillagerEntity villager &&
-                villager.getVillagerData().getProfession() == VillagerProfession.NONE) {
-            return;
+        if (entityHitResult.getEntity() instanceof VillagerEntity villager && villager.getVillagerData().getProfession() == VillagerProfession.LIBRARIAN) {
+                return;
         }
+        if (entityHitResult.getEntity() instanceof FakePlayerEntityUtils)
+            return;
+
 
         if (player.getAttackCooldownProgress(0.0F) < 1.0) return;
 
         long currentTime = System.currentTimeMillis();
+        // Default short delay
+        int shortDelay = 2;
+        // Default long delay
+        int longDelay = 50;
         int randomDelay = random.nextInt(longDelay - shortDelay + 1) + shortDelay;
 
         if (currentTime - lastAttackTime < randomDelay) return;
@@ -75,13 +80,12 @@ public class AutoAttack extends ToggledModule {
             public void run() {
                 InteractionUtils.inputAttack();
                 lastAttackTime = System.currentTimeMillis();
-                timer.cancel(); // Cancel the timer after executing the task
+                timer.cancel();
             }
         }, delay);
     }
 
     private boolean isHoldingWeapon(ClientPlayerEntity player) {
-        // Check if the player is holding a weapon
         if (player == null) return false;
         Item item = player.getMainHandStack().getItem();
         return item instanceof SwordItem || item instanceof AxeItem;

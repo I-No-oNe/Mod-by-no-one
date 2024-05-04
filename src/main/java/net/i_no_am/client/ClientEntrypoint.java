@@ -38,6 +38,8 @@ public class ClientEntrypoint implements ClientModInitializer {
 
 public static final FreeCamera FREE_CAMERA = new FreeCamera();
 
+public static final NoFall No_Fall = new NoFall();
+
 public static final InventoryTweaks INVENTORY_TWEAKS = new InventoryTweaks();
 
 public static final ElytraSwitch ELYTRA_SWITCH = new ElytraSwitch();
@@ -53,7 +55,8 @@ public static final ElytraSwitch ELYTRA_SWITCH = new ElytraSwitch();
             ELYTRA_SWITCH,
             NO_ARMOR_RENDER,
             INVENTORY_TWEAKS,
-            SCAFFOLD
+            SCAFFOLD,
+            No_Fall
     };
     public static final MinecraftClient client = MinecraftClient.getInstance();
     public static ClientPlayNetworkHandler networkHandler;
@@ -98,7 +101,6 @@ public static final ElytraSwitch ELYTRA_SWITCH = new ElytraSwitch();
         GuiCommand.register(dispatcher);
         ArmorRenderCommand.register(dispatcher);
         CameraOverlayCommand.register(dispatcher);
-        CameraSpeedCommand.register(dispatcher);
         ClientFakerCommand.register(dispatcher);
     }
 
@@ -108,3 +110,4 @@ public static final ElytraSwitch ELYTRA_SWITCH = new ElytraSwitch();
         GetCodeCommand.register(dispatcher);
     }
 }
+///TODO - Make elytra fly module
