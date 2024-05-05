@@ -181,4 +181,7 @@ public final class PlayerUtils implements Global {
         }
         return false;
     }
+    public static Vec3d getMovement() {
+        return new Vec3d(player().sidewaysSpeed, player().upwardSpeed, player().forwardSpeed);
+    }
 }

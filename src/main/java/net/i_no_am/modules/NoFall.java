@@ -5,7 +5,7 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import org.lwjgl.glfw.GLFW;
 
-import static net.i_no_am.client.ClientEntrypoint.No_Fall;
+import static net.i_no_am.client.ClientEntrypoint.NO_FALL;
 
 
 public class NoFall extends ToggledModule {
@@ -16,7 +16,7 @@ public class NoFall extends ToggledModule {
     @Override
     public void tick(MinecraftClient client) {
         super.tick(client);
-        if (!No_Fall.enabled) return;
+        if (!NO_FALL.enabled) return;
         ClientPlayerEntity player = client.player;
         assert player != null;
         if (player.fallDistance <= (player.isFallFlying() ? 1 : 2))

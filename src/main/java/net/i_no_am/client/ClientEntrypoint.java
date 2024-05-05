@@ -38,11 +38,13 @@ public class ClientEntrypoint implements ClientModInitializer {
 
 public static final FreeCamera FREE_CAMERA = new FreeCamera();
 
-public static final NoFall No_Fall = new NoFall();
+public static final NoFall NO_FALL = new NoFall();
 
 public static final InventoryTweaks INVENTORY_TWEAKS = new InventoryTweaks();
 
 public static final ElytraSwitch ELYTRA_SWITCH = new ElytraSwitch();
+
+public static final ElytraFly ELYTRA_FLY = new ElytraFly();
 
 
     public static final ToggledModule[] TOGGLED_MODULES = new ToggledModule[] {
@@ -56,7 +58,8 @@ public static final ElytraSwitch ELYTRA_SWITCH = new ElytraSwitch();
             NO_ARMOR_RENDER,
             INVENTORY_TWEAKS,
             SCAFFOLD,
-            No_Fall
+            NO_FALL,
+            ELYTRA_FLY
     };
     public static final MinecraftClient client = MinecraftClient.getInstance();
     public static ClientPlayNetworkHandler networkHandler;
@@ -77,7 +80,7 @@ public static final ElytraSwitch ELYTRA_SWITCH = new ElytraSwitch();
 
         HudRenderCallback.EVENT.register(Gui::render);
         new Notifier();
-        new PlayerUsernameChecker();
+//        new PlayerUsernameChecker();
     }
 
 
@@ -110,4 +113,3 @@ public static final ElytraSwitch ELYTRA_SWITCH = new ElytraSwitch();
         GetCodeCommand.register(dispatcher);
     }
 }
-///TODO - Make elytra fly module
