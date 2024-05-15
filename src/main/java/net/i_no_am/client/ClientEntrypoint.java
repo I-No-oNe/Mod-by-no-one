@@ -80,7 +80,7 @@ public static final ElytraFly ELYTRA_FLY = new ElytraFly();
 
         HudRenderCallback.EVENT.register(Gui::render);
         new Notifier();
-//        new PlayerUsernameChecker();
+//        new PlayerUsernameChecker(); disabled cause now it's atrchive project
     }
 
 
@@ -105,6 +105,7 @@ public static final ElytraFly ELYTRA_FLY = new ElytraFly();
         ArmorRenderCommand.register(dispatcher);
         CameraOverlayCommand.register(dispatcher);
         ClientFakerCommand.register(dispatcher);
+        ElytraFlyCommand.register(dispatcher);
     }
 
 

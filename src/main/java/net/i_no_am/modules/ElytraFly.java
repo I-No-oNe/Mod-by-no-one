@@ -8,12 +8,12 @@ import org.lwjgl.glfw.GLFW;
 
 import java.util.Objects;
 
-import static net.i_no_am.client.ClientEntrypoint.ELYTRA_FLY;
+import static net.i_no_am.client.ClientEntrypoint.*;
 
 public class ElytraFly extends ToggledModule implements Global {
 
     private static float speed = 1f;
-    private static boolean autoFly = true;
+    private static boolean autoFly = false;
 
     public ElytraFly() {
         super("Elytra Fly", GLFW.GLFW_KEY_UNKNOWN);
@@ -29,10 +29,21 @@ public class ElytraFly extends ToggledModule implements Global {
             return;
         }
 
-        if (ELYTRA_FLY.isEnabled()) {
+        if (!NO_FALL.enabled && !FLY_HACK.enabled && ELYTRA_FLY.enabled) {
+            double moveX = 0;
+            double moveY = 0;
+            double moveZ = 0;
+
+            if (client.options.jumpKey.isPressed()) {
+                moveY += speed;
+            }
+            if (client.options.sneakKey.isPressed()) {
+                moveY -= speed;
+            }
+
             client.player.setVelocity(0, 0, 0);
             client.player.updateVelocity(speed, PlayerUtils.getMovement());
-            client.player.addVelocity(0, 0.01f, 0);
+            client.player.addVelocity(moveX, moveY, moveZ);
 
             if (!Objects.requireNonNull(mc.player).isFallFlying() && autoFly) {
                 Objects.requireNonNull(client.getNetworkHandler()).sendPacket(new ClientCommandC2SPacket(client.player, ClientCommandC2SPacket.Mode.START_FALL_FLYING));
@@ -40,6 +51,7 @@ public class ElytraFly extends ToggledModule implements Global {
             }
         }
     }
+
 
     public static void setSpeed(float speed) {
         ElytraFly.speed = speed;

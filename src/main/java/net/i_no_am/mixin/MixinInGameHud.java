@@ -13,8 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static net.i_no_am.client.ClientEntrypoint.FREE_CAMERA;
-import static net.i_no_am.client.ClientEntrypoint.client;
+import static net.i_no_am.client.ClientEntrypoint.*;
 import static net.i_no_am.client.Global.mc;
 
 @Mixin(InGameHud.class)
@@ -61,4 +60,12 @@ public class MixinInGameHud {
         final Window win = mc.getWindow();
         context.fill(0, 0, win.getWidth(), win.getHeight(), color);
     }
+
+    @Inject(method = "renderScoreboardSidebar*", at = @At("HEAD"), cancellable = true)
+    private void toggleScoreboardOnRenderScoreboardSidebar(CallbackInfo ci) {
+        if (RENDER_TWEAKS.enabled) {
+            ci.cancel();
+        }
+    }
 }
+

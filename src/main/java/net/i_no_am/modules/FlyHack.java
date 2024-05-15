@@ -2,47 +2,69 @@ package net.i_no_am.modules;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.entity.player.PlayerAbilities;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.glfw.GLFW;
 
+import java.util.Objects;
+
+import static net.i_no_am.NoOneMod.PREFIX;
 import static net.i_no_am.client.ClientEntrypoint.FLY_HACK;
 
 public class FlyHack extends ToggledModule {
-    int toggle = 0;
-    double FALL_SPEED = -0.04;
 
+    private boolean warningSent = false;
 
     public FlyHack() {
         super("Fly Hack", GLFW.GLFW_KEY_UNKNOWN);
     }
 
+    private static final int SPACE_KEY = GLFW.GLFW_KEY_SPACE;
+    private static final double JETPACK_MAX_SPEED = 0.6;
+
     @Override
     public void tick(MinecraftClient client) {
         super.tick(client);
-        final ClientPlayerEntity player = client.player;
-        if (player == null) return;
-        if (FLY_HACK.enabled) {
-            boolean inFlyMode = player.isCreative() || player.isSpectator();
-            PlayerAbilities abilities = player.getAbilities();
-
-            abilities.flying = inFlyMode && !player.isOnGround() && !FLY_HACK.enabled;
-            abilities.allowFlying = inFlyMode;
+        if (!FLY_HACK.enabled) {
+            warningSent = false;
+            return;
         }
-        boolean inFlyMode = player.isCreative() || player.isSpectator();
 
-        player.getAbilities().allowFlying = true;
-        if (player.hasVehicle()) return;
-        if (inFlyMode) return;
+        if (client.world == null) return;
 
-        final Vec3d velocity = player.getVelocity();
-        if (FLY_HACK.enabled && toggle == 0) {
-            player.setVelocity(new Vec3d(
-                    velocity.x, FALL_SPEED - velocity.y, velocity.z
-            ));
+        ClientPlayerEntity player = client.player;
+        if (player != null && !isWearingElytra(player)) {
+            Vec3d viewVector = Objects.requireNonNull(client.getCameraEntity()).getRotationVec(1.0F);
+            if (GLFW.glfwGetKey(client.getWindow().getHandle(), SPACE_KEY) == GLFW.GLFW_PRESS) {
+                Vec3d motion = new Vec3d(viewVector.x * 1.5, 0.25, viewVector.z * 1.5);
+                if (motion.lengthSquared() > JETPACK_MAX_SPEED * JETPACK_MAX_SPEED) {
+                    motion = motion.normalize().multiply(JETPACK_MAX_SPEED);
+                }
+                player.setVelocity(motion);
+            }
+
+            if (player.fallDistance > 2 && !isFallingFastEnoughToCauseDamage(player)) {
+                player.fallDistance = 0;
+            }
+
+            if (!warningSent) {
+                player.sendMessage(Text.of(PREFIX + Formatting.RED + "Be aware that you might get banned"), false);
+                warningSent = true;
+            }
         }
-        if (toggle == 0 || velocity.y < FALL_SPEED)
-            toggle = 20;
-        toggle--;
+    }
+
+    public static boolean isWearingElytra(PlayerEntity player) {
+        ItemStack chestplate = player.getEquippedStack(EquipmentSlot.CHEST);
+        return !chestplate.isEmpty() && chestplate.getItem() == Items.ELYTRA;
+    }
+
+    private boolean isFallingFastEnoughToCauseDamage(ClientPlayerEntity player) {
+        return player.getVelocity().y < -0.5;
     }
 }
