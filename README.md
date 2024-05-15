@@ -28,7 +28,6 @@ Features:
 BE AWARE:
 # This project had served its purpose, now it's time for new and bigger things, I won't update and fix anymore bugs.
 # This project is for educational purposes, so don't accuse this "mod" or "client" to be "cheats".
-# if you want to use this mod please contact me, the client is public, but you need access to use it *(if not your game will crash)*.
 ```
 ----------------------------------------------------
 ## Tysm for using this mod :pray:
