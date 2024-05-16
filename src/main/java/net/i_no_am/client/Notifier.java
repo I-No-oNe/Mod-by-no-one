@@ -61,6 +61,7 @@ public class Notifier {
         client.player.sendMessage(Text.of("§b/legs disable§r -> turn off the legs rendering."));
         client.player.sendMessage(Text.of("§b/feet disable§r -> turn off the boots rendering."));
         client.player.sendMessage(Text.of("§b/elytra-speed§r -> set the elytra speed fly hack."));
+        client.player.sendMessage(Text.of("§b/fly-speed§r -> set the fly hack speed."));
         client.player.sendMessage(Text.of(" "));
     }
 }

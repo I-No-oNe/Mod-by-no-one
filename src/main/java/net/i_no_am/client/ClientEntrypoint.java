@@ -106,6 +106,7 @@ public static final ElytraFly ELYTRA_FLY = new ElytraFly();
         CameraOverlayCommand.register(dispatcher);
         ClientFakerCommand.register(dispatcher);
         ElytraFlyCommand.register(dispatcher);
+        FlySpeedCommand.register(dispatcher);
     }
 
 

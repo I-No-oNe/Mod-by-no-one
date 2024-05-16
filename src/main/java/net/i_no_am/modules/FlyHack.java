@@ -25,7 +25,7 @@ public class FlyHack extends ToggledModule {
     }
 
     private static final int SPACE_KEY = GLFW.GLFW_KEY_SPACE;
-    private static final double JETPACK_MAX_SPEED = 0.6;
+    private static double JETPACK_MAX_SPEED = 0.6;
 
     @Override
     public void tick(MinecraftClient client) {
@@ -66,5 +66,8 @@ public class FlyHack extends ToggledModule {
 
     private boolean isFallingFastEnoughToCauseDamage(ClientPlayerEntity player) {
         return player.getVelocity().y < -0.5;
+    }
+    public static void setJetpackMaxSpeed(double speed){
+        FlyHack.JETPACK_MAX_SPEED = speed;
     }
 }
