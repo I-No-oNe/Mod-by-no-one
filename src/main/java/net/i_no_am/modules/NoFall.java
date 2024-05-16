@@ -20,8 +20,10 @@ public class NoFall extends ToggledModule {
         super.tick(client);
         if (!NO_FALL.enabled) return;
         ClientPlayerEntity player = client.player;
-        if (Objects.requireNonNull(player).fallDistance <= (player.isFallFlying() ? 1 : 2))
+        if (player == null) return; 
+        if (player.fallDistance <= (player.isFallFlying() ? 1 : 2))
             return;
+
 
         if (player.isFallFlying() && player.isSneaking()
                 && !isFallingFastEnoughToCauseDamage(player))
