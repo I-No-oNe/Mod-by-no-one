@@ -1,5 +1,5 @@
 {
-  "category.i_no_am": "No one's mod",
+  "category.i_no_am": "Mod By No-oNe",
   "key.i_no_am.noarmorrender_toggle": "Toggle No Armor Render",
   "key.i_no_am.rendertweaks_toggle": "Toggle Render tweaks",
   "key.i_no_am.autoattack_toggle": "Toggle Auto Attack",
@@ -10,6 +10,7 @@
   "key.i_no_am.boatfly_toggle": "Toggle Boat Fly",
   "key.i_no_am.fastmine_toggle": "Toggle Fast Mine",
   "key.i_no_am.scaffold_toggle": "Toggle Scaffold",
+  "key.i_no_am.nofall_toggle": "Toggle No Fall",
+  "key.i_no_am.elytrafly_toggle": "Toggle Elytra Fly",
   "key.i_no_am.inventorytweaks_toggle": "Toggle Inventory Tweaks"
-
 }

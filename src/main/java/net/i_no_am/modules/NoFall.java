@@ -5,8 +5,6 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import org.lwjgl.glfw.GLFW;
 
-import java.util.Objects;
-
 import static net.i_no_am.client.ClientEntrypoint.NO_FALL;
 
 
@@ -20,7 +18,7 @@ public class NoFall extends ToggledModule {
         super.tick(client);
         if (!NO_FALL.enabled) return;
         ClientPlayerEntity player = client.player;
-        if (player == null) return; 
+        if (player == null) return;
         if (player.fallDistance <= (player.isFallFlying() ? 1 : 2))
             return;
 
@@ -29,7 +27,9 @@ public class NoFall extends ToggledModule {
                 && !isFallingFastEnoughToCauseDamage(player))
             return;
 
-        player.networkHandler.sendPacket(new PlayerMoveC2SPacket.OnGroundOnly(true));
+        if (player.networkHandler != null) {
+            player.networkHandler.sendPacket(new PlayerMoveC2SPacket.OnGroundOnly(true));
+        }
     }
 
     private boolean isFallingFastEnoughToCauseDamage(ClientPlayerEntity player) {
